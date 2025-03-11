@@ -65,7 +65,7 @@ async def create_chat_completion(
         kwargs['max_tokens'] = max_tokens
 
     if llm_provider == "openai":
-        base_url = os.enviorn.get("OPENAI_BASE_URL", None)
+        base_url = os.environ.get("OPENAI_BASE_URL", None)
         if base_url:
             kwargs['openai_api_base'] = base_url
 
@@ -81,6 +81,7 @@ async def create_chat_completion(
             llm_costs = estimate_llm_cost(str(messages), response)
             cost_callback(llm_costs)
 
+        print('3247731355-create', response)
         return response
 
     logging.error(f"Failed to get response from {llm_provider} API")

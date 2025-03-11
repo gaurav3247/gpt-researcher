@@ -156,13 +156,22 @@ class GenericLLMProvider:
 
     async def stream_response(self, messages, websocket=None):
         paragraph = ""
+        thought = ""
+        thinking = False
         response = ""
 
         # Streaming the response using the chain astream method from langchain
         async for chunk in self.llm.astream(messages):
             content = chunk.content
             if content is not None:
-                response += content
+                if content == "<think>":
+                    thinking = True
+                if content == "</think>":
+                    thinking = False
+                if thinking:
+                    thought += content
+                else:
+                  response += content
                 paragraph += content
                 if "\n" in paragraph:
                     await self._send_output(paragraph, websocket)

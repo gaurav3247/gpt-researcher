@@ -189,6 +189,7 @@ def get_config_dict(
     google_api_key: str, google_cx_key: str, bing_api_key: str,
     searchapi_api_key: str, serpapi_api_key: str, serper_api_key: str, searx_url: str
 ) -> Dict[str, str]:
+    print("hello this ran 3247731355")
     return {
         "LANGCHAIN_API_KEY": langchain_api_key or os.getenv("LANGCHAIN_API_KEY", ""),
         "OPENAI_API_KEY": openai_api_key or os.getenv("OPENAI_API_KEY", ""),
